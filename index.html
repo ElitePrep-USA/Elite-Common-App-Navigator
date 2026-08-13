@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Elite Common App Navigator - interactive guide, glossary, college requirements explorer, and application planner.">
+  <title>Elite Common App Navigator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-wrap">
+      <img src="assets/elite-seal.png" class="brand-seal" alt="Elite seal">
+      <div>
+        <div class="brand-kicker">Elite Educational Institute</div>
+        <div class="brand-title">Common App Navigator</div>
+      </div>
+    </div>
+    <button class="mobile-nav-button" id="mobileNavButton" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Primary navigation">
+      <button data-view="home" class="nav-link active">Home</button>
+      <button data-view="sections" class="nav-link">Common App Sections</button>
+      <button data-view="guides" class="nav-link">Step-by-Step Guides</button>
+      <button data-view="requirements" class="nav-link">College Requirements</button>
+      <button data-view="planner" class="nav-link">My Applications <span id="navCount" class="nav-count">0</span></button>
+      <button data-view="ask" class="nav-link">Ask the Navigator</button>
+      <button data-view="essays" class="nav-link">Essays</button>
+      <button data-view="glossary" class="nav-link">Glossary</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="view-home" class="view active-view">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">2026-27 first-year application cycle</div>
+          <h1>Know what to do next in Common App.</h1>
+          <p class="hero-lede">Learn how the application works, look up college-specific requirements, build a personalized application list, and turn a complex process into a clear set of next steps.</p>
+          <div class="hero-actions">
+            <button class="button primary" data-go="sections">Start the walkthrough</button>
+            <button class="button secondary" data-go="requirements">Find a college</button>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-panel-label">Common App Navigator</div>
+          <div class="hero-stat"><strong id="homeCollegeCount">700</strong><span>colleges in the 2026-27 requirements dataset</span></div>
+          <div class="hero-stat"><strong>8</strong><span>major Common App areas mapped</span></div>
+          <div class="hero-stat"><strong id="homeSavedCount">0</strong><span>colleges in My Applications</span></div>
+          <div class="source-note">Requirements grid updated August 10, 2026.</div>
+        </div>
+      </div>
+
+      <section class="section-shell">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Choose your task</div>
+            <h2>What do you need help with?</h2>
+          </div>
+        </div>
+        <div class="task-grid">
+          <button class="task-card" data-go="guide"><span class="task-num">01</span><h3>I'm just getting started</h3><p>Follow a step-by-step Common App walkthrough.</p></button>
+          <button class="task-card" data-go="sections" data-section-id="profile"><span class="task-num">02</span><h3>Explore the Common App</h3><p>See what is inside Profile, Family, Education, Testing, Activities, Writing, Courses & Grades, and My Colleges.</p></button>
+          <button class="task-card" data-go="guides"><span class="task-num">03</span><h3>Use a Step-by-Step Guide</h3><p>Get help with specific Common App tasks and processes.</p></button>
+          <button class="task-card" data-go="requirements"><span class="task-num">03</span><h3>I need a college's requirements</h3><p>Search deadlines, fees, testing, portfolios, and recommendations.</p></button>
+          <button class="task-card" data-go="planner"><span class="task-num">05</span><h3>I'm applying to several colleges</h3><p>Compare your list and generate a personalized checklist.</p></button>
+          <button class="task-card" data-go="ask"><span class="task-num">06</span><h3>I have a requirements question</h3><p>Ask the rule-based Navigator about the colleges in My Applications.</p></button>
+          <button class="task-card" data-go="glossary"><span class="task-num">07</span><h3>I don't understand a term</h3><p>Search the complete Common App Application Dictionary.</p></button>
+          <button class="task-card" data-go="essays"><span class="task-num">08</span><h3>I'm working on essays</h3><p>See how the Essay Center will connect to the supplemental essay database.</p></button>
+        </div>
+      </section>
+
+      <section class="section-shell compact-shell">
+        <div class="split-callout">
+          <div><div class="eyebrow">Design principle</div><h2>Use this alongside Common App, not instead of it.</h2></div>
+          <p>The Navigator does not ask students to enter sensitive application data. It helps organize instructions and college requirements while the actual application remains in Common App.</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="view-sections" class="view">
+      <div class="page-intro">
+        <div>
+          <div class="eyebrow">Interactive application map</div>
+          <h1>Common App Sections</h1>
+          <p>Explore the major areas of My Common Application and the college-specific work found under My Colleges.</p>
+        </div>
+      </div>
+
+      <section class="section-shell guide-map-shell">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">My Common Application + My Colleges</div>
+            <h2>Explore the major application areas</h2>
+            <p class="section-lede">Select an area to see its major subsections, what students are being asked to provide, and Elite counselor guidance.</p>
+          </div>
+        </div>
+        <div class="app-section-map" id="appSectionMap" aria-label="Common App section navigator"></div>
+        <article class="section-detail-panel" id="sectionDetail"></article>
+      </section>
+    </section>
+
+    <section id="view-guides" class="view">
+      <div class="page-intro">
+        <div>
+          <div class="eyebrow">Common App toolkit</div>
+          <h1>Step-by-Step Guides</h1>
+          <p>Choose a topic when you need help understanding a Common App task or process.</p>
+        </div>
+      </div>
+
+      <section class="section-shell">
+        <div class="guide-layout embedded-guide-layout standalone-guide-layout">
+          <aside class="guide-sidebar" id="guideSidebar"></aside>
+          <article class="guide-content" id="guideContent"></article>
+        </div>
+      </section>
+    </section>
+
+    <section id="view-requirements" class="view">
+      <div class="page-intro">
+        <div><div class="eyebrow">2026-27 Common App Requirements Grid</div><h1>College Requirements Explorer</h1><p>Search the uploaded Common App grid and turn a dense row into a readable college profile.</p></div>
+        <div class="data-badge"><strong>Updated</strong><span>Aug. 10, 2026</span></div>
+      </div>
+      <div class="search-panel">
+        <label for="collegeSearch">Search a Common App member college</label>
+        <div class="search-row"><input id="collegeSearch" type="search" placeholder="Try: Stanford, USC, Boston University…" autocomplete="off"><button id="clearCollegeSearch" class="button ghost">Clear</button></div>
+        <div id="collegeResults" class="search-results" aria-live="polite"></div>
+      </div>
+      <div id="collegeDetail" class="college-detail empty-state">
+        <div class="empty-icon">⌕</div><h2>Choose a college</h2><p>Search above to view deadlines, fees, Common App requirements, testing, and recommendations.</p>
+      </div>
+    </section>
+
+    <section id="view-planner" class="view">
+      <div class="print-report-header" aria-hidden="true">
+        <div class="print-brand-row"><img src="assets/elite-seal.png" alt=""><div><strong>Elite Common App Navigator</strong><span>My Applications Report</span></div></div>
+        <div class="print-meta"><span id="printDate"></span><span>2026–27 Common App Requirements</span></div>
+      </div>
+      <div class="page-intro">
+        <div><div class="eyebrow">College-list requirements tool</div><h1>My Applications</h1><p>Your selected colleges stay on this device. Compare requirements and generate a requirements summary without duplicating the progress tracking already built into Common App.</p></div>
+        <div class="page-actions print-actions"><button id="printApplications" class="button secondary" type="button" disabled>Print / Save PDF</button><button id="clearPlanner" class="button ghost danger">Clear list</button></div>
+      </div>
+      <div id="plannerEmpty" class="empty-state"><div class="empty-icon">＋</div><h2>Your list is empty</h2><p>Add colleges from the Requirements Explorer to start comparing applications.</p><button class="button primary" data-go="requirements">Find colleges</button></div>
+      <div id="plannerContent" hidden>
+        <section class="planner-summary" id="plannerSummary"></section>
+        <section class="section-shell no-side-padding"><div class="section-heading"><div><div class="eyebrow">Side-by-side</div><h2>Requirements comparison</h2></div></div><div class="table-scroll"><table class="comparison-table" id="comparisonTable"></table></div></section>
+        <section class="section-shell no-side-padding"><div class="section-heading"><div><div class="eyebrow">Generated from your list</div><h2>Requirements summary</h2><p class="section-lede">This is a reference list of what each college requires, not a second application-progress tracker.</p></div></div><div id="checklist" class="checklist"></div></section>
+      </div>
+      <div class="print-report-footer" aria-hidden="true"><strong>Source:</strong> Common App 2026–27 First-Year Deadlines, Fees and Requirements Grid, updated August 10, 2026. Requirements may change; verify current information before submitting an application.</div>
+    </section>
+
+
+    <section id="view-ask" class="view">
+      <div class="page-intro">
+        <div><div class="eyebrow">Rule-based answers — no AI connection</div><h1>Ask the Navigator</h1><p>Ask practical questions about the colleges saved in My Applications. Answers are calculated directly from the Common App Requirements Grid.</p></div>
+      </div>
+      <div class="ask-layout">
+        <section class="ask-panel">
+          <div class="eyebrow">Choose a question</div>
+          <div id="askQuestions" class="ask-question-grid"></div>
+        </section>
+        <section id="askAnswer" class="ask-answer empty-state">
+          <div class="empty-icon">?</div>
+          <h2>Select a question</h2>
+          <p>The Navigator will evaluate the colleges currently saved in My Applications.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="view-essays" class="view">
+      <div class="page-intro"><div><div class="eyebrow">Future module</div><h1>Essay Center</h1><p>The architecture is ready for the supplemental essay database to plug into this Navigator later.</p></div></div>
+      <div class="essay-grid">
+        <article class="essay-card active-card"><div class="eyebrow">Common App</div><h2>Personal Essay</h2><p>Future versions can connect the personal statement workflow, brainstorming guidance, and drafting resources to the broader application planner.</p><span class="status-pill">Planned</span></article>
+        <article class="essay-card"><div class="eyebrow">College-specific</div><h2>Supplemental Essays</h2><p>The supplemental essay app can become a data module here: college → exact prompts → categories → word limits → counselor guidance.</p><span class="status-pill">Ready to integrate</span></article>
+        <article class="essay-card"><div class="eyebrow">Workload</div><h2>Essay Load Analyzer</h2><p>Once prompt data is connected, My Applications can calculate how many responses a student needs and which colleges create the heaviest writing load.</p><span class="status-pill">Future</span></article>
+      </div>
+    </section>
+
+    <section id="view-glossary" class="view">
+      <div class="page-intro"><div><div class="eyebrow">Complete uploaded dictionary</div><h1>Common App Glossary</h1><p>Search every entry in the uploaded Common App Application Dictionary. FY and TR badges indicate entries labeled First-year-only or Transfer-only in the source.</p></div></div>
+      <div class="search-panel"><label for="glossarySearch">Search terms</label><input id="glossarySearch" type="search" placeholder="Try: FERPA, Midyear Report, Courses & Grades…" autocomplete="off"></div>
+      <div id="glossaryList" class="glossary-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Elite Common App Navigator</strong><br><span>Planning and instructional resource for students and counselors.</span></div>
+    <div class="footer-note">College requirements are based on the 2026-27 Common App Requirements Grid updated 08-10-2026. Policies can change; verify time-sensitive requirements with the college and Common App.</div>
+  </footer>
+
+  <script src="data/requirements.js"></script>
+  <script src="data/guides.js"></script>
+  <script src="data/sections.js"></script>
+  <script src="data/glossary.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
